@@ -1,0 +1,32 @@
+### 7. Request Routing web server
+
+#### Design:
+There are 3 classes:
+* Router: which personally I think is unnecessary, is just like well named, basically is a RouteTrie wrapper
+* RouteTrie: All the stuff is done here:
+    1. Insert:
+        * Iterate through the path parts path.split by '/'
+        * insert the path part in the node 
+        * update the node with the created by the new path part for the next iteration
+        * When there are no more path parts, assign the handler
+    2. Find:
+        * Find a path handler 
+        * Iterate through the path parts path.split by '/'
+        * on each iteration update the node with the path part
+        * when there are no more path parts, return the handler
+* RouteTrieNode: container of the Dictionary with other path parts and a handler with None as default
+    1. Insert:
+        * This checks if the part is already in the node children, if so, a new RouteTrieNode is created with a key equals to the path part
+        * This method is unnecessary due to the defaultdict
+
+#### Time Complexity:
+* insert: O(n)
+The insert operation saying that n = each '/', takes O(n) because there is one iteration per path part
+* find: O(n)
+Almost the same process, iterating through input one time, O(n)
+
+#### Space Complexity:
+* insert:
+path_parts occupies n but splitted, so takes O(n)
+* find:
+path_parts occupies n but splitted, so takes O(n)
